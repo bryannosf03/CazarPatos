@@ -15,6 +15,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -23,6 +26,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var textViewContador: TextView
     lateinit var textViewTiempo: TextView
     lateinit var imageViewPato: ImageView
+
+    lateinit var mAdView : AdView
+
     var contador = 0
     var anchoPantalla = 0
     var alturaPantalla = 0
@@ -35,6 +41,14 @@ class MainActivity : AppCompatActivity() {
         textViewContador = findViewById(R.id.textViewContador)
         textViewTiempo = findViewById(R.id.textViewTiempo)
         imageViewPato = findViewById(R.id.imageViewPato)
+
+        //Inicializacion ´publicidad
+        MobileAds.initialize(this) {}
+
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
 
         //Obtener el usuario de pantalla login
         val extras = intent.extras ?: return
